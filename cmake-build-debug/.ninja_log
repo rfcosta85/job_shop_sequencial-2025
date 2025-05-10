@@ -1,0 +1,11 @@
+# ninja log v6
+39	468	7678230007520229	CMakeFiles/job_shop_sequencial.dir/main.c.obj	93e96f36fbc22d34
+472	988	7678230011841250	job_shop_sequencial.exe	9751838311e7c30b
+26	517	7678239513579897	CMakeFiles/job_shop_sequencial.dir/main.c.obj	93e96f36fbc22d34
+519	893	7678239518489885	job_shop_sequencial.exe	9751838311e7c30b
+20	279	7678240155423522	CMakeFiles/job_shop_sequencial.dir/main.c.obj	93e96f36fbc22d34
+282	588	7678240158046599	job_shop_sequencial.exe	9751838311e7c30b
+24	444	7678266080285361	CMakeFiles/job_shop_sequencial.dir/main.c.obj	93e96f36fbc22d34
+447	855	7678266084508083	job_shop_sequencial.exe	9751838311e7c30b
+59	423	7678280670245521	CMakeFiles/job_shop_sequencial.dir/main.c.obj	93e96f36fbc22d34
+425	732	7678280673905543	job_shop_sequencial.exe	9751838311e7c30b

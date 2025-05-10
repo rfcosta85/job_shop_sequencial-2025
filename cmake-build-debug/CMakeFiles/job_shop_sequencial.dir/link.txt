@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\job_shop_sequencial.dir/objects.a
+C:\PROGRA~1\JETBRA~1\CLION2~1.5\bin\mingw\bin\ar.exe qc CMakeFiles\job_shop_sequencial.dir/objects.a @CMakeFiles\job_shop_sequencial.dir\objects1.rsp
+C:\PROGRA~1\JETBRA~1\CLION2~1.5\bin\mingw\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\job_shop_sequencial.dir/objects.a -Wl,--no-whole-archive -o job_shop_sequencial.exe -Wl,--out-implib,libjob_shop_sequencial.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\job_shop_sequencial.dir\linkLibs.rsp
