@@ -3,7 +3,6 @@
 #include <string.h>
 #include <time.h>
 
-#define MAX_JOBS 100
 #define MAX_OPS 100
 #define MAX_MACHINES 64
 
@@ -21,11 +20,11 @@ typedef struct {
     int num_ops;
 } Job;
 
-int max(int a, int b) { return a > b? a : b; }
+int max(int a, int b) { return a > b ? a : b; }
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
-        fprintf(stderr, "Uso %s <dadosDeEntrada.txt> <dadosDeSaida.txt>\n", argv);
+        fprintf(stderr, "Uso: %s <dadosDeEntrada.txt> <dadosDeSaida.txt>\n", argv[0]);  // CORRIGIDO argv[0]
         return 1;
     }
 
@@ -35,28 +34,37 @@ int main(int argc, char *argv[]) {
 
     FILE *fin = fopen(argv[1], "r");
     FILE *fout = fopen(argv[2], "w");
-    if (!fin ||!fout) {
+    if (!fin || !fout) {
         perror("Erro ao abrir o arquivo");
         return 1;
     }
 
     int num_jobs, num_machines;
-    if (fscanf(fin, "%d %d", &num_jobs, &num_machines)!= 2) {
+    if (fscanf(fin, "%d %d", &num_jobs, &num_machines) != 2) {
         fprintf(stderr, "Erro ao ler o número de jobs e máquinas.\n");
         fclose(fin);
         fclose(fout);
         return 1;
     }
 
-    Job jobs[MAX_JOBS];
+    // ALOCAÇÃO DINÂMICA (evita stack overflow) // ALTERADO
+    Job *jobs = malloc(num_jobs * sizeof(Job));
+    if (!jobs) {
+        fprintf(stderr, "Erro de alocação de memória para jobs.\n");
+        fclose(fin);
+        fclose(fout);
+        return 1;
+    }
+
     int machines_available[MAX_MACHINES] = {0};
 
     for (int j = 0; j < num_jobs; j++) {
         jobs[j].num_ops = num_machines;
         int current_time = 0;
         for (int o = 0; o < num_machines; o++) {
-            if (fscanf(fin, "%d %d", &jobs[j].ops[o].machine, &jobs[j].ops[o].duration)!= 2) {
+            if (fscanf(fin, "%d %d", &jobs[j].ops[o].machine, &jobs[j].ops[o].duration) != 2) {
                 fprintf(stderr, "Erro ao ler os dados do job %d, operação %d.\n", j, o);
+                free(jobs); // LIBERA MEMÓRIA
                 fclose(fin);
                 fclose(fout);
                 return 1;
@@ -84,6 +92,8 @@ int main(int argc, char *argv[]) {
     }
     fprintf(fout, "Makespan: %d\n", makespan);
 
+    // Liberação de recursos
+    free(jobs);
     fclose(fin);
     fclose(fout);
 
