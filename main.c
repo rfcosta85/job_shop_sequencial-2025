@@ -28,9 +28,9 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // Medição de tempo
-    struct timespec start_time, end_time;
-    clock_gettime(CLOCK_MONOTONIC, &start_time);
+    // // Medição de tempo
+    // struct timespec start_time, end_time;
+    // clock_gettime(CLOCK_MONOTONIC, &start_time);
 
     FILE *fin = fopen(argv[1], "r");
     FILE *fout = fopen(argv[2], "w");
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // ALOCAÇÃO DINÂMICA (evita stack overflow) // ALTERADO
+    // ALOCAÇÃO DINÂMICA (evita stack overflow)
     Job *jobs = malloc(num_jobs * sizeof(Job));
     if (!jobs) {
         fprintf(stderr, "Erro de alocação de memória para jobs.\n");
@@ -77,6 +77,10 @@ int main(int argc, char *argv[]) {
             machines_available[m] = jobs[j].ops[o].end_time;
         }
     }
+
+    // Medição de tempo
+    struct timespec start_time, end_time;
+    clock_gettime(CLOCK_MONOTONIC, &start_time);
 
     // Escrever resultado
     int makespan = 0;
